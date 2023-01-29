@@ -8,7 +8,7 @@ map.doubleClickZoom.disable();
 
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 17,
-    minZoom: 5,
+    minZoom: 12,
     attribution:
         '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 }).addTo(map);
@@ -22,20 +22,32 @@ async function getStationsInfo() {
         const id = element.channelID;
         const key = element.readAPIKey;
 
+        // Get other properties of station
         const response = fetch(
-            // Get other properties of station
             `https://api.thingspeak.com/channels/${id}/feeds.json?api_key=${key}&results=0`
         )
             .then((response) => {
                 return response.json();
             })
             .then((data) => {
+                const { name, latitude, longitude, updated_at } = data.channel;
+
+                const icon = L.icon({
+                    iconUrl:
+                        "https://icons.getbootstrap.com/assets/icons/exclamation-triangle-fill.svg",
+                    iconSize: [38, 95],
+                });
+                const marker = L.marker([latitude, longitude], { icon: icon })
+                    .addTo(map)
+                    .bindPopup(name);
+
                 STATIONS.push({
-                    name: data.channel.name,
-                    id: data.channel.id,
-                    key: data.channel.key,
-                    location: [data.channel.latitude, data.channel.longitude],
-                    updated_at: data.channel.updated_at,
+                    name: name,
+                    id: id,
+                    key: key,
+                    location: [latitude, longitude],
+                    updated_at: updated_at,
+                    marker: marker,
                 });
             });
     });
