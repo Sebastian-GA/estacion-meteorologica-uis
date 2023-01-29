@@ -58,7 +58,7 @@ async function setup() {
     document.getElementById("select-station").innerHTML = options;
 
     // SET VALUES OF GAUGES
-    updateGauges();
+    buildGauges();
 }
 
 async function updateStationsStatus() {

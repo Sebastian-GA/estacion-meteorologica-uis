@@ -52,6 +52,7 @@ let GAUGES = [];
 function buildGauges() {
     for (let i = 1; i <= 5; i++) {
         const gauge = document.getElementById(`gauge-field${i}`);
+        const stationIndex = document.getElementById("select-station").value;
 
         const data = {
             datasets: [
@@ -60,7 +61,7 @@ function buildGauges() {
                     backgroundColor: ["red", "green", "orange"],
                     minValue: 0,
                     units: "",
-                    value: 0,
+                    value: STATIONS[stationIndex].last_feed[`field${i}`],
                     borderColor: "white",
                     borderWidth: 3,
                     cutout: "80%",
@@ -92,15 +93,18 @@ function buildGauges() {
     }
 }
 
-buildGauges();
-
 function updateGauges() {
     const stationIndex = document.getElementById("select-station").value;
     for (let i = 1; i <= 5; i++) {
+        GAUGES[i - 1].destroy();
+        /*
         const gauge = GAUGES[i - 1];
-        
+
         gauge.data.datasets[0].value =
             STATIONS[stationIndex].last_feed[`field${i}`];
         gauge.update();
+        */
     }
+    GAUGES = [];
+    buildGauges();
 }
