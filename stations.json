@@ -1,0 +1,14 @@
+{
+    "stations": [
+        {
+            "name": "Estación Meteorológica UIS - 1",
+            "channelID": 2018613,
+            "readAPIKey": "YAXL6GXAOO8FR27G"
+        },
+        {
+            "name": "Estación Meteorológica UIS - 2",
+            "channelID": 0,
+            "readAPIKey": ""
+        }
+    ]
+}

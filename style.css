@@ -1,14 +1,14 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&display=swap");
 
 :root {
-    --primary-color: #6A9C78;
-    --secondary-color: #F9F8ED;
-    --alt-color: #C4E3CB;
+    --primary-color: #6a9c78;
+    --secondary-color: #f9f8ed;
+    --alt-color: #c4e3cb;
 }
 
 body {
-    font-family: 'Montserrat';
+    font-family: "Montserrat";
 }
 
 /* HEADER STYLES */
@@ -16,7 +16,7 @@ body {
 .header {
     background-color: var(--primary-color);
     color: var(--secondary-color);
-    
+
     height: 60px;
     padding: 0 80px;
     display: flex;
@@ -30,7 +30,7 @@ body {
     align-items: center;
     font-size: 25px;
 }
-#icon{
+#icon {
     margin-right: 10px;
     font-size: 1.2em;
     text-decoration: none;
@@ -44,12 +44,12 @@ body {
     list-style: none;
 }
 .header .nav-links li {
-    display:  inline-block;
+    display: inline-block;
     margin: auto 10px;
 }
 .header .nav-links a {
     color: var(--secondary-color);
-    text-decoration: none;    
+    text-decoration: none;
     transition: all 0.3s;
 }
 .header .nav-links a:hover {
