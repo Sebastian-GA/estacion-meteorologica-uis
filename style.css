@@ -104,3 +104,8 @@ select {
     font-size: 14px;
     transition: all 150ms ease;
 }
+
+.gaugeBox {
+    width: 200px;
+    aspect-ratio: 1;
+}

@@ -80,3 +80,5 @@ document
         let coords = e.target.value.split(",");
         map.setView(coords);
     });
+
+const myGauge = document.getElementById("gauge1");
