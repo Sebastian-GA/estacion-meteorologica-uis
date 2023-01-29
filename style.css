@@ -2,9 +2,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&display=swap");
 
 :root {
-    --primary-color: #6a9c78;
-    --secondary-color: #f9f8ed;
-    --alt-color: #c4e3cb;
+    /*
+    --color-dark1: #022b3a;
+    --color-dark2: #1f7a8c;
+    --color-light1: #e1e5f2;
+    --color-light2: #ffffff;
+    */
+    --color-dark1: #483838;
+    --color-dark2: #42855b;
+    --color-light1: #f8f8f4;
+    --color-light2: #ffffff;
 }
 
 body {
@@ -14,8 +21,8 @@ body {
 /* HEADER STYLES */
 
 .header {
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
+    background-color: var(--color-dark1);
+    color: var(--color-light2);
 
     height: 60px;
     padding: 0 80px;
@@ -37,7 +44,7 @@ body {
     transition: all 0.3s;
 }
 #icon:hover {
-    color: var(--alt-color);
+    color: var(--color-dark2);
 }
 
 .header .nav-links {
@@ -48,36 +55,52 @@ body {
     margin: auto 10px;
 }
 .header .nav-links a {
-    color: var(--secondary-color);
+    color: var(--color-light2);
     text-decoration: none;
     transition: all 0.3s;
 }
 .header .nav-links a:hover {
-    color: var(--alt-color);
+    color: var(--color-dark2);
 }
 
 /* BODY STYLES */
 
 main {
-    background-color: var(--alt-color);
+    background-color: var(--color-light1);
     padding: 20px;
 
     display: flex;
     justify-content: space-around;
 }
-
+/* MAP STYLE */
 .mapContainer {
     width: 60%;
     height: auto;
 }
-.statsContainer {
-    background-color: var(--secondary-color);
-    width: 35%;
-}
-
-/* MAP STYLE */
-
 #map {
     width: 100%;
     aspect-ratio: 1.5;
+}
+
+.statsContainer {
+    background-color: var(--color-light2);
+    width: 35%;
+}
+
+.select {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+select {
+    padding: 7px 40px 7px 12px;
+    width: 80%;
+    border: 1px solid #e8eaed;
+    border-radius: 5px;
+    background: white;
+    box-shadow: 0 1px 3px -2px #9098a9;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    transition: all 150ms ease;
 }
