@@ -15,6 +15,7 @@
 }
 
 body {
+    min-width: 800px;
     font-family: "Montserrat";
 }
 
@@ -83,6 +84,7 @@ main {
 }
 
 .statsContainer {
+    text-align: center;
     background-color: var(--color-light2);
     width: 35%;
 }
@@ -105,7 +107,27 @@ select {
     transition: all 150ms ease;
 }
 
+.chartContainer {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+.chartContainer .variableStatus {
+    margin: 4px 0;
+    padding: 4px 0;
+    width: 45%;
+    min-width: 100px;
+    border: 2px solid #483838;
+    border-radius: 4%;
+    
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    text-align: center;
+}
+
 .gaugeBox {
-    width: 200px;
+    margin: 0 auto;
+    width: 80%;
     aspect-ratio: 1;
 }

@@ -1,8 +1,5 @@
 let STATIONS = [];
-const url_api =
-    "https://api.thingspeak.com/channels/{id}/feeds{format}?api_key={key}&results={x}";
 
-// MAP SETUP
 let map = L.map("map").setView([7.1404, -73.1201], 15);
 map.doubleClickZoom.disable();
 
@@ -46,7 +43,7 @@ async function getStationsInfo() {
             key: key,
             location: [latitude, longitude],
             updated_at: updated_at,
-            last_feed: data.feeds,
+            last_feed: data.feeds[0],
             marker: marker,
         });
     }
@@ -55,7 +52,6 @@ async function getStationsInfo() {
     let options = "";
     for (let index = 0; index < STATIONS.length; index++) {
         options += `<option value="${index}">${STATIONS[index].name}</option>`;
-        
     }
     document.getElementById("select-station").innerHTML = options;
 }
@@ -78,8 +74,12 @@ async function updateStationsStatus() {
 document
     .getElementById("select-station")
     .addEventListener("change", function (e) {
-        let coords = STATIONS[e.target.value].location;
+        const index = e.target.value
+        let coords = STATIONS[index].location;
         map.setView(coords);
-    });
+        
+        piopo.data.datasets[0].value = STATIONS[index].last_feed.field1;
 
-const myGauge = document.getElementById("gauge1");
+        piopo.update();
+
+    });
