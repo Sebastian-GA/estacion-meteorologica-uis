@@ -47,38 +47,60 @@ const gaugeNeedle = {
     },
 };
 
-const myData = {
-    datasets: [
-        {
-            data: [20, 10, 70],
-            backgroundColor: ["red", "green", "orange"],
-            minValue: 0,
-            units: "ppm",
-            value: 20,
-            borderColor: "white",
-            borderWidth: 3,
-            cutout: "80%",
-            circumference: 250,
-            rotation: 235,
-        },
-    ],
-};
+let GAUGES = [];
 
-const myGauge = document.getElementById("gauge-field1");
-const piopo = new Chart(myGauge, {
-    type: "doughnut",
-    data: myData,
-    options: {
-        plugins: {
-            legend: {
-                display: false,
-            },
-            tooltip: {
-                callbacks: {
-                    label: "",
+function buildGauges() {
+    for (let i = 1; i <= 5; i++) {
+        const gauge = document.getElementById(`gauge-field${i}`);
+
+        const data = {
+            datasets: [
+                {
+                    data: [20, 10, 70],
+                    backgroundColor: ["red", "green", "orange"],
+                    minValue: 0,
+                    units: "",
+                    value: 0,
+                    borderColor: "white",
+                    borderWidth: 3,
+                    cutout: "80%",
+                    circumference: 250,
+                    rotation: 235,
                 },
-            },
-        },
-    },
-    plugins: [gaugeNeedle],
-});
+            ],
+        };
+
+        GAUGES.push(
+            new Chart(gauge, {
+                type: "doughnut",
+                data,
+                options: {
+                    plugins: {
+                        legend: {
+                            display: false,
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: "",
+                            },
+                        },
+                    },
+                },
+                plugins: [gaugeNeedle],
+            })
+        );
+    }
+}
+
+buildGauges();
+
+function updateGauges() {
+    const stationIndex = document.getElementById("select-station").value;
+    for (let i = 1; i <= 5; i++) {
+        const gauge = GAUGES[i - 1];
+        
+        gauge.data.datasets[0].value =
+            STATIONS[stationIndex].last_feed[`field${i}`];
+        gauge.update();
+    }
+}

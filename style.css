@@ -110,7 +110,7 @@ select {
 .chartContainer {
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 .chartContainer .variableStatus {
     margin: 4px 0;
@@ -125,7 +125,9 @@ select {
     justify-content: center;
     text-align: center;
 }
-
+.variableStatus h3{
+    width: 100%;
+}
 .gaugeBox {
     margin: 0 auto;
     width: 80%;

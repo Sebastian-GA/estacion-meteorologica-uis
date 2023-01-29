@@ -11,8 +11,10 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 }).addTo(map);
 
 // STATIONS
-async function getStationsInfo() {
+async function setup() {
     // This function must be executed only once!
+
+    // GET STATIONS INFO
     const response = await fetch("./stations.json");
     const stationsfile = await response.json();
 
@@ -48,15 +50,16 @@ async function getStationsInfo() {
         });
     }
 
-    // Set options in the "select-station" selector
+    // SET OPTIONS IN SELECTOR
     let options = "";
     for (let index = 0; index < STATIONS.length; index++) {
         options += `<option value="${index}">${STATIONS[index].name}</option>`;
     }
     document.getElementById("select-station").innerHTML = options;
-}
 
-getStationsInfo();
+    // SET VALUES OF GAUGES
+    updateGauges();
+}
 
 async function updateStationsStatus() {
     // This function get the last feed (must be executed at least every minute)
@@ -71,15 +74,12 @@ async function updateStationsStatus() {
     }
 }
 
+setup();
 document
     .getElementById("select-station")
     .addEventListener("change", function (e) {
-        const index = e.target.value
+        const index = e.target.value;
         let coords = STATIONS[index].location;
         map.setView(coords);
-        
-        piopo.data.datasets[0].value = STATIONS[index].last_feed.field1;
-
-        piopo.update();
-
+        updateGauges();
     });
