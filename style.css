@@ -1,0 +1,54 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&display=swap');
+
+:root {
+    --primary-color: #6A9C78;
+    --secondary-color: #F9F8ED;
+    --alt-color: #C4E3CB;
+}
+
+body {
+    font-family: 'Montserrat';
+}
+
+/* HEADER STYLES */
+
+.header {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    
+    height: 60px;
+    padding: 0 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 25px;
+}
+#icon{
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+
+.header .nav-links {
+    list-style: none;
+}
+.header .nav-links li {
+    display:  inline-block;
+    padding: 0 10px;
+}
+.header .nav-links li:hover {
+    transform: scale(1.05);
+}
+.header .nav-links a {
+    text-decoration: none;
+    color: var(--secondary-color);
+}
+.header .nav-links a:hover {
+    color: var(--alt-color);
+}
