@@ -53,9 +53,10 @@ async function getStationsInfo() {
 
     // Set options in the "select-station" selector
     let options = "";
-    STATIONS.forEach((station) => {
-        options += `<option value="${station.location}">${station.name}</option>`;
-    });
+    for (let index = 0; index < STATIONS.length; index++) {
+        options += `<option value="${index}">${STATIONS[index].name}</option>`;
+        
+    }
     document.getElementById("select-station").innerHTML = options;
 }
 
@@ -77,7 +78,7 @@ async function updateStationsStatus() {
 document
     .getElementById("select-station")
     .addEventListener("change", function (e) {
-        let coords = e.target.value.split(",");
+        let coords = STATIONS[e.target.value].location;
         map.setView(coords);
     });
 
