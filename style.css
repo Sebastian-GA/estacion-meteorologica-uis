@@ -84,6 +84,7 @@ main {
 }
 
 .statsContainer {
+    padding-top: 10px;
     text-align: center;
     background-color: var(--color-light2);
     width: 35%;
@@ -115,7 +116,7 @@ select {
 .chartContainer .variableStatus {
     margin: 4px 0;
     padding: 4px 0;
-    width: 45%;
+    width: 42%;
     min-width: 100px;
     border: 2px solid #483838;
     border-radius: 4%;

@@ -1,3 +1,37 @@
+let GAUGES = [];
+const gaugeStyle = {
+    field1: {
+        data: [20, 50, 20],
+        backgroundColor: ["green", "orange", "red"],
+        minValue: 0,
+        units: "",
+    },
+    field2: {
+        data: [20, 10, 70],
+        backgroundColor: ["red", "green", "orange"],
+        minValue: 0,
+        units: "",
+    },
+    field3: {
+        data: [20, 10, 70],
+        backgroundColor: ["red", "green", "orange"],
+        minValue: 0,
+        units: "",
+    },
+    field4: {
+        data: [20, 10, 70],
+        backgroundColor: ["red", "green", "orange"],
+        minValue: 0,
+        units: "",
+    },
+    field5: {
+        data: [20, 10, 70],
+        backgroundColor: ["red", "green", "orange"],
+        minValue: 0,
+        units: "",
+    },
+};
+
 const gaugeNeedle = {
     id: "gaugeNeedle",
     afterDatasetDraw(chart) {
@@ -39,15 +73,22 @@ const gaugeNeedle = {
         ctx.fill();
 
         // Text
-        ctx.font = `${width * 0.085}px Helvetica`;
+        ctx.font = `${width * 0.1}px Helvetica`;
         ctx.fillStyle = "#444";
         ctx.textAlign = "center";
         ctx.fillText(value + " " + data.datasets[0].units, 0, 0.2 * height);
+        
+        ctx.font = `${width * 0.07}px Arial`;
+        ctx.textAlign = "left";
+        ctx.fillText(minValue, -0.35 * width, 0.33 * height);
+        ctx.textAlign = "right";
+        ctx.fillText(minValue + span, 0.35 * width, 0.33 * height);
+        ctx.textAlign = "center";
+        ctx.fillText((minValue + span) / 2, 0, -0.5 * height);
+
         ctx.restore();
     },
 };
-
-let GAUGES = [];
 
 function buildGauges() {
     for (let i = 1; i <= 5; i++) {
@@ -57,10 +98,10 @@ function buildGauges() {
         const data = {
             datasets: [
                 {
-                    data: [20, 10, 70],
-                    backgroundColor: ["red", "green", "orange"],
-                    minValue: 0,
-                    units: "",
+                    data: gaugeStyle[[`field${i}`]].data,
+                    backgroundColor: gaugeStyle[[`field${i}`]].backgroundColor,
+                    minValue: gaugeStyle[[`field${i}`]].minValue,
+                    units: gaugeStyle[[`field${i}`]].units,
                     value: STATIONS[stationIndex].last_feed[`field${i}`],
                     borderColor: "white",
                     borderWidth: 3,
