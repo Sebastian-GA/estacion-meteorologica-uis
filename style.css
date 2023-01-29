@@ -18,7 +18,7 @@ body {
     color: var(--secondary-color);
     
     height: 60px;
-    padding: 0 70px;
+    padding: 0 80px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -26,13 +26,18 @@ body {
 
 .logo {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     font-size: 25px;
 }
 #icon{
     margin-right: 10px;
     font-size: 1.2em;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+#icon:hover {
+    color: var(--alt-color);
 }
 
 .header .nav-links {
@@ -40,15 +45,39 @@ body {
 }
 .header .nav-links li {
     display:  inline-block;
-    padding: 0 10px;
-}
-.header .nav-links li:hover {
-    transform: scale(1.05);
+    margin: auto 10px;
 }
 .header .nav-links a {
-    text-decoration: none;
     color: var(--secondary-color);
+    text-decoration: none;    
+    transition: all 0.3s;
 }
 .header .nav-links a:hover {
     color: var(--alt-color);
+}
+
+/* BODY STYLES */
+
+main {
+    background-color: var(--alt-color);
+    padding: 20px;
+
+    display: flex;
+    justify-content: space-around;
+}
+
+.mapContainer {
+    width: 60%;
+    height: auto;
+}
+.statsContainer {
+    background-color: var(--secondary-color);
+    width: 35%;
+}
+
+/* MAP STYLE */
+
+#map {
+    width: 100%;
+    aspect-ratio: 1.5;
 }
