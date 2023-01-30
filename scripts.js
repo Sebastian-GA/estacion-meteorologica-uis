@@ -1,6 +1,6 @@
 let STATIONS = [];
 
-let map = L.map("map").setView([7.1404, -73.1201], 15);
+let map = L.map("map").setView([7.132804, -73.1221], 15);
 map.doubleClickZoom.disable();
 
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -74,12 +74,25 @@ async function updateStationsStatus() {
     }
 }
 
-setup();
+function updateMap() {
+    // TODO
+    return;
+}
+
+function update() {
+    updateStationsStatus();
+    updateMap();
+    updateGauges();
+}
+
 document
     .getElementById("select-station")
     .addEventListener("change", function (e) {
         const index = e.target.value;
         let coords = STATIONS[index].location;
-        map.setView(coords);
+        map.setView(coords, 16, { animate: true, pan: { duration: 0.5}});
         updateGauges();
     });
+
+setup();
+setInterval(update, 60000); // Update Status every 60 Seconds
