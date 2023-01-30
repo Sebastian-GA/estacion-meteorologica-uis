@@ -1,4 +1,5 @@
 let GAUGES = [];
+
 const gaugeStyle = {
     field1: {
         data: [10, 20, 15, 15],
@@ -49,9 +50,7 @@ const gaugeNeedle = {
 
         const totalAngle = data.datasets[0].circumference;
         const startingAngle = -Math.PI / 2 - (Math.PI * (totalAngle / 2)) / 180;
-        const angle =
-            startingAngle +
-            ((Math.PI * totalAngle) / 180) * ((value - minValue) / span);
+        const angle = startingAngle + ((Math.PI * totalAngle) / 180) * ((value - minValue) / span);
 
         const dotx = width / 2;
         const doty = 0.6 * height;
@@ -94,8 +93,7 @@ function buildGauges() {
     const stationIndex = document.getElementById("select-station").value;
 
     const lastEntryTime = new Date(STATIONS[stationIndex].last_feed.created_at);
-    document.getElementById("last-update").textContent =
-        lastEntryTime.toLocaleString();
+    document.getElementById("last-update").textContent = lastEntryTime.toLocaleString();
 
     for (let i = 1; i <= 5; i++) {
         const gauge = document.getElementById(`gauge-field${i}`);

@@ -6,8 +6,7 @@ map.doubleClickZoom.disable();
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 17,
     minZoom: 12,
-    attribution:
-        '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 }).addTo(map);
 
 // STATIONS
@@ -15,7 +14,7 @@ async function setup() {
     // This function must be executed only once!
 
     // GET STATIONS INFO
-    const response = await fetch("./stations.json");
+    const response = await fetch("https://raw.githubusercontent.com/Estacion-Meteorologica-UIS/thingspeak/main/stations.json");
     const stationsfile = await response.json();
 
     for (let index = 0; index < stationsfile.stations.length; index++) {
@@ -32,13 +31,10 @@ async function setup() {
         const { name, latitude, longitude, updated_at } = data.channel;
 
         const icon = L.icon({
-            iconUrl:
-                "https://icons.getbootstrap.com/assets/icons/exclamation-triangle-fill.svg",
+            iconUrl: "https://icons.getbootstrap.com/assets/icons/exclamation-triangle-fill.svg",
             iconSize: [38, 95],
         });
-        const marker = L.marker([latitude, longitude], { icon: icon })
-            .addTo(map)
-            .bindPopup(name);
+        const marker = L.marker([latitude, longitude], { icon: icon }).addTo(map).bindPopup(name);
 
         STATIONS.push({
             name: name,
@@ -87,14 +83,12 @@ function update() {
     updateGauges();
 }
 
-document
-    .getElementById("select-station")
-    .addEventListener("change", function (e) {
-        const index = e.target.value;
-        let coords = STATIONS[index].location;
-        map.setView(coords, 16, { animate: true, pan: { duration: 0.5 } });
-        updateGauges();
-    });
+document.getElementById("select-station").addEventListener("change", function (e) {
+    const index = e.target.value;
+    let coords = STATIONS[index].location;
+    map.setView(coords, 16, { animate: true, pan: { duration: 0.5 } });
+    updateGauges();
+});
 
 setup();
 setInterval(update, 60000); // Update Status every 60 Seconds
