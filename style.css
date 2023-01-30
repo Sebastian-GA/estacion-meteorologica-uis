@@ -117,11 +117,18 @@ select {
     font-size: 14px;
     transition: all 150ms ease;
 }
+.last-update {
+    margin: 0 30px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+}
 
 .chartContainer {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
+    margin-bottom: 15px;
 }
 .chartContainer .variableStatus {
     margin: 4px 0;

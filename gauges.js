@@ -1,26 +1,26 @@
 let GAUGES = [];
 const gaugeStyle = {
     field1: {
-        data: [20, 50, 20],
-        backgroundColor: ["green", "orange", "red"],
-        minValue: 0,
-        units: "",
+        data: [10, 20, 15, 15],
+        backgroundColor: ["blue", "lightblue", "orange", "red"],
+        minValue: -10,
+        units: "°C",
     },
     field2: {
-        data: [20, 10, 70],
-        backgroundColor: ["red", "green", "orange"],
+        data: [20, 20, 40, 20],
+        backgroundColor: ["green", "orange", "lightblue", "blue"],
         minValue: 0,
         units: "",
     },
     field3: {
-        data: [20, 10, 70],
-        backgroundColor: ["red", "green", "orange"],
+        data: [60, 40, 30, 20, 10],
+        backgroundColor: ["green", "yellow", "orange", "red", "blue"],
         minValue: 0,
         units: "",
     },
     field4: {
-        data: [20, 10, 70],
-        backgroundColor: ["red", "green", "orange"],
+        data: [20, 50, 70],
+        backgroundColor: ["red", "grey", "orange"],
         minValue: 0,
         units: "",
     },
@@ -73,12 +73,12 @@ const gaugeNeedle = {
         ctx.fill();
 
         // Text
-        ctx.font = `${width * 0.1}px Helvetica`;
+        ctx.font = `${width * 0.1}px Montserrat`;
         ctx.fillStyle = "#444";
         ctx.textAlign = "center";
         ctx.fillText(value + " " + data.datasets[0].units, 0, 0.2 * height);
-        
-        ctx.font = `${width * 0.07}px Arial`;
+
+        ctx.font = `${width * 0.07}px Montserrat`;
         ctx.textAlign = "left";
         ctx.fillText(minValue, -0.35 * width, 0.33 * height);
         ctx.textAlign = "right";
@@ -91,9 +91,14 @@ const gaugeNeedle = {
 };
 
 function buildGauges() {
+    const stationIndex = document.getElementById("select-station").value;
+
+    const lastEntryTime = new Date(STATIONS[stationIndex].last_feed.created_at);
+    document.getElementById("last-update").textContent =
+        lastEntryTime.toLocaleString();
+
     for (let i = 1; i <= 5; i++) {
         const gauge = document.getElementById(`gauge-field${i}`);
-        const stationIndex = document.getElementById("select-station").value;
 
         const data = {
             datasets: [

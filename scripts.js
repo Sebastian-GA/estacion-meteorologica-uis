@@ -25,7 +25,8 @@ async function setup() {
 
         // Get other properties of station
         const response = await fetch(
-            `https://api.thingspeak.com/channels/${id}/feeds.json?api_key=${key}&results=1`
+            `https://api.thingspeak.com/channels/${id}/feeds.json?api_key=${key}&results=1` +
+                "&timezone=America%2FBogota&status=true"
         );
         const data = await response.json();
         const { name, latitude, longitude, updated_at } = data.channel;
@@ -56,7 +57,6 @@ async function setup() {
         options += `<option value="${index}">${STATIONS[index].name}</option>`;
     }
     document.getElementById("select-station").innerHTML = options;
-
     // SET VALUES OF GAUGES
     buildGauges();
 }
@@ -66,7 +66,8 @@ async function updateStationsStatus() {
     for (let index = 0; index < STATIONS.length; index++) {
         const station = STATIONS[index];
         const response = await fetch(
-            `https://api.thingspeak.com/channels/${station.id}/feeds.json?api_key=${station.key}&results=1`
+            `https://api.thingspeak.com/channels/${station.id}/feeds.json?api_key=${station.key}&results=1` +
+                "&timezone=America%2FBogota&status=true"
         );
         const data = await response.json();
 
@@ -80,6 +81,7 @@ function updateMap() {
 }
 
 function update() {
+    // TODO: Fix updateStationsStatus
     updateStationsStatus();
     updateMap();
     updateGauges();
@@ -90,7 +92,7 @@ document
     .addEventListener("change", function (e) {
         const index = e.target.value;
         let coords = STATIONS[index].location;
-        map.setView(coords, 16, { animate: true, pan: { duration: 0.5}});
+        map.setView(coords, 16, { animate: true, pan: { duration: 0.5 } });
         updateGauges();
     });
 
