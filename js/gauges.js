@@ -2,16 +2,16 @@ let GAUGES = [];
 
 const gaugeStyle = {
     field1: {
-        data: [10, 20, 15, 15],
-        backgroundColor: ["blue", "lightblue", "orange", "red"],
+        data: [25, 10, 5, 20],
+        backgroundColor: ["deepskyblue", "green", "orange", "red"],
         minValue: -10,
         units: "°C",
     },
     field2: {
-        data: [20, 20, 40, 20],
-        backgroundColor: ["green", "orange", "lightblue", "blue"],
+        data: [30, 10, 30, 30],
+        backgroundColor: ["red", "grey", "green", "brown"],
         minValue: 0,
-        units: "",
+        units: "%",
     },
     field3: {
         data: [60, 40, 30, 20, 10],

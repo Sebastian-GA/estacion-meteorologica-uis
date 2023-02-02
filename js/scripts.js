@@ -78,6 +78,8 @@ function updateMap() {
 
 function update() {
     // TODO: Fix updateStationsStatus
+    // La segunda vez que se ejecuta no se obtinen correctamente los datos
+    // Solución fácil: Forzar a actualizar la página para actualizar los datos
     updateStationsStatus();
     updateMap();
     updateGauges();
