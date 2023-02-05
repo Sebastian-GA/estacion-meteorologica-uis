@@ -17,19 +17,19 @@ const gaugeStyle = {
         data: [60, 40, 30, 20, 10],
         backgroundColor: ["green", "yellow", "orange", "red", "blue"],
         minValue: 0,
-        units: "",
+        units: "ug/m3",
     },
     field4: {
         data: [20, 50, 70],
         backgroundColor: ["red", "grey", "orange"],
         minValue: 0,
-        units: "",
+        units: "mW/m2",
     },
     field5: {
         data: [20, 10, 70],
         backgroundColor: ["red", "green", "orange"],
         minValue: 0,
-        units: "",
+        units: "ppm",
     },
 };
 
