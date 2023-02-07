@@ -25,7 +25,7 @@ async function setup() {
         // Get other properties of station
         const response = await fetch(
             `https://api.thingspeak.com/channels/${id}/feeds.json?api_key=${key}&results=1` +
-                "&timezone=America%2FBogota&status=true"
+                "&timezone=America%2FBogota&status=true&round=1"
         );
         const data = await response.json();
         const { name, latitude, longitude, updated_at } = data.channel;
@@ -58,16 +58,16 @@ async function setup() {
 }
 
 async function updateStationsStatus() {
-    // This function get the last feed (must be executed at least every minute)
+    // This function gets the last feed
     for (let index = 0; index < STATIONS.length; index++) {
         const station = STATIONS[index];
         const response = await fetch(
             `https://api.thingspeak.com/channels/${station.id}/feeds.json?api_key=${station.key}&results=1` +
-                "&timezone=America%2FBogota&status=true"
+                "&timezone=America%2FBogota&status=true&round=1"
         );
         const data = await response.json();
 
-        station.last_feed = data.feeds;
+        station.last_feed = data.feeds[0];
     }
 }
 
@@ -77,9 +77,6 @@ function updateMap() {
 }
 
 function update() {
-    // TODO: Fix updateStationsStatus
-    // La segunda vez que se ejecuta no se obtinen correctamente los datos
-    // Solución fácil: Forzar a actualizar la página para actualizar los datos
     updateStationsStatus();
     updateMap();
     updateGauges();
