@@ -75,7 +75,8 @@ const gaugeNeedle = {
         ctx.font = `${width * 0.1}px Montserrat`;
         ctx.fillStyle = "#444";
         ctx.textAlign = "center";
-        ctx.fillText(value + " " + data.datasets[0].units, 0, 0.2 * height);
+        ctx.fillText(value, 0, 0.2 * height);
+        ctx.fillText(data.datasets[0].units, 0, 0.3 * height);
 
         ctx.font = `${width * 0.07}px Montserrat`;
         ctx.textAlign = "left";
