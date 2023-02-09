@@ -140,16 +140,15 @@ function buildGauges() {
 
 function updateGauges() {
     const stationIndex = document.getElementById("select-station").value;
+    
+    const lastEntryTime = new Date(STATIONS[stationIndex].last_feed.created_at);
+    document.getElementById("last-update").textContent = lastEntryTime.toLocaleString();
+    
     for (let i = 1; i <= 5; i++) {
-        GAUGES[i - 1].destroy();
-        /*
         const gauge = GAUGES[i - 1];
 
         gauge.data.datasets[0].value =
             STATIONS[stationIndex].last_feed[`field${i}`];
         gauge.update();
-        */
     }
-    GAUGES = [];
-    buildGauges();
 }

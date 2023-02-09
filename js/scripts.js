@@ -14,7 +14,9 @@ async function setup() {
     // This function must be executed only once!
 
     // GET STATIONS INFO
-    const response = await fetch("https://raw.githubusercontent.com/Estacion-Meteorologica-UIS/thingspeak/main/stations.json");
+    const response = await fetch(
+        "https://raw.githubusercontent.com/Estacion-Meteorologica-UIS/thingspeak/main/stations.json"
+    );
     const stationsfile = await response.json();
 
     for (let index = 0; index < stationsfile.stations.length; index++) {
@@ -22,13 +24,13 @@ async function setup() {
         const id = station.channelID;
         const key = station.readAPIKey;
 
-        // Get other properties of station
+        // Get station info and last entry
         const response = await fetch(
             `https://api.thingspeak.com/channels/${id}/feeds.json?api_key=${key}&results=1` +
-                "&timezone=America%2FBogota&status=true&round=1"
+                "&timezone=America%2FBogota&status=true&round=2"
         );
         const data = await response.json();
-        const { name, latitude, longitude, updated_at } = data.channel;
+        const { name, latitude, longitude } = data.channel;
 
         const icon = L.icon({
             iconUrl: "https://icons.getbootstrap.com/assets/icons/exclamation-triangle-fill.svg",
@@ -41,19 +43,19 @@ async function setup() {
             id: id,
             key: key,
             location: [latitude, longitude],
-            updated_at: updated_at,
             last_feed: data.feeds[0],
             marker: marker,
         });
     }
 
-    // SET OPTIONS IN SELECTOR
+    // Add stations to selector
     let options = "";
     for (let index = 0; index < STATIONS.length; index++) {
         options += `<option value="${index}">${STATIONS[index].name}</option>`;
     }
     document.getElementById("select-station").innerHTML = options;
-    // SET VALUES OF GAUGES
+
+    // Build Gauges
     buildGauges();
 }
 
@@ -63,7 +65,7 @@ async function updateStationsStatus() {
         const station = STATIONS[index];
         const response = await fetch(
             `https://api.thingspeak.com/channels/${station.id}/feeds.json?api_key=${station.key}&results=1` +
-                "&timezone=America%2FBogota&status=true&round=1"
+                "&timezone=America%2FBogota&status=true&round=2"
         );
         const data = await response.json();
 
@@ -90,4 +92,4 @@ document.getElementById("select-station").addEventListener("change", function (e
 });
 
 setup();
-setInterval(update, 60000); // Update Status every 60 Seconds
+setInterval(update, 6000); // Update Status every 60 Seconds
